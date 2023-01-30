@@ -20,7 +20,7 @@
         </h2>
         <div>
             <p>
-                <b>title: </b>${note.title}
+                <b>Title: </b>${note.title}
             </p>
         </div>
         <div>
