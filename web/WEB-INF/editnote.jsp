@@ -19,7 +19,7 @@
             View Note
         </h2>
         <div>
-            <form action="note" method="post">
+            <form action="note?page=view" method="post">
             <b>Title: </b><input type="text" name=="title" value="${note.title}"
         </div>
         <div>

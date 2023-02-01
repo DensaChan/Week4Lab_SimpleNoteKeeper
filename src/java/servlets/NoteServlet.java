@@ -1,9 +1,12 @@
 package servlets;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,17 +36,48 @@ public class NoteServlet extends HttpServlet {
         note.setContents(contents);
         request.setAttribute("note", note);
         
+        String page = request.getParameter("page");
+        
+        String jspPath = page == null ? "/WEB-INF/viewnote.jsp"
+                                        : "/WEB-INF/editnote.jsp";
+        
+        getServletContext().getRequestDispatcher(jspPath).forward(request, response);
+        
         // requests either viewnote.jsp or editnote.jsp
-        if (request.getParameter("Edit") !=null) {
-            getServletContext().getRequestDispatcher("/WEB-INF/eiewnote.jsp").forward(request, response);
-        } else {
-            getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
-        }
+       // if (request.getParameter("edit") !=null) {
+       //    getServletContext().getRequestDispatcher("/WEB-INF/editnote.jsp").forward(request, response);
+       // } else {
+       //     getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
+       // }
     }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // set parameters and create a new Note object
+        String title = request.getParameter("title");
+        String contents = request.getParameter("contents");
+        Note note = new Note(title, contents);
+        
+        request.setAttribute("note", note);
+        
+        // parameters validation
+        if (title == null || title.equals("") || contents == null || contents.equals("")){
+            boolean error = true;
+            request.setAttribute("error", error);
+            getServletContext().getRequestDispatcher("/WEB-INF/editnote.jsp").forward(request, response);
+            return;
+        }
+        
+        // user input into the note object into the file
+        String path = getServletContext().getRealPath("WEB-INF/note.txt");
+        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(path, false)));
+        pw.println(title);
+        pw.println(contents);
+        pw.close();
+        
+        // forwards to the editnote.jsp page
        getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
     }
 
