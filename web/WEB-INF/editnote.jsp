@@ -24,7 +24,7 @@
         </div>
         <div>
             <b>Contents: </b>
-            <textarea name=="conttents" rows="15" cols="50">${note.contents}</textarea>
+            <textarea name=="contents" rows="15" cols="50">${note.contents}</textarea>
             <input type="submit" value="Save">
             </form>
         </div>
