@@ -29,7 +29,7 @@
             </p>
         </div>
         <div>
-            <a href="noteServlet">Edit</a>
+            <a href="note?edit">Edit</a>
         </div>  
     </body>
 </html>

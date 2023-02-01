@@ -17,7 +17,7 @@ import models.Note;
  *
  * @author Densa
  */
-public class NoteServlet extends HttpServlet {
+public class NoteServlet1 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -36,19 +36,12 @@ public class NoteServlet extends HttpServlet {
         note.setContents(contents);
         request.setAttribute("note", note);
         
-        String page = request.getParameter("page");
-        
-        String jspPath = page == null ? "/WEB-INF/viewnote.jsp"
-                                        : "/WEB-INF/editnote.jsp";
-        
-        getServletContext().getRequestDispatcher(jspPath).forward(request, response);
-        
         // requests either viewnote.jsp or editnote.jsp
-       // if (request.getParameter("edit") !=null) {
-       //    getServletContext().getRequestDispatcher("/WEB-INF/editnote.jsp").forward(request, response);
-       // } else {
-       //     getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
-       // }
+        if (request.getParameter("edit") !=null) {
+           getServletContext().getRequestDispatcher("/WEB-INF/editnote.jsp").forward(request, response);
+        } else {
+            getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
+       }
     }
     
     @Override
