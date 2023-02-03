@@ -64,7 +64,7 @@ public class NoteServlet1 extends HttpServlet {
         }
         
         // user input into the note object into the file
-        String path = getServletContext().getRealPath("WEB-INF/note.txt");
+        String path = getServletContext().getRealPath("/WEB-INF/note.txt");
         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(path, false)));
         pw.println(title);
         pw.println(contents);

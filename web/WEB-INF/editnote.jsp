@@ -19,12 +19,12 @@
             View Note
         </h2>
         <div>
-            <form action="note?page=view" method="post">
-            <b>Title: </b><input type="text" name=="title" value="${note.title}"
+            <form action="note" method="post">
+            <b>Title: </b><input type="text" name="title" value="${note.title}"
         </div>
         <div>
             <b>Contents: </b>
-            <textarea name=="contents" rows="15" cols="50">${note.contents}</textarea>
+            <textarea name="contents" rows="15" cols="50">${note.contents}</textarea>
             <input type="submit" value="Save">
             </form>
         </div>
